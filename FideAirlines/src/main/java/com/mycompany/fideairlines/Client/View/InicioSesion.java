@@ -33,7 +33,7 @@ public class InicioSesion extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         TAcontrasena = new javax.swing.JTextField();
         TAemail = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        Benviar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
 
@@ -48,6 +48,11 @@ public class InicioSesion extends javax.swing.JFrame {
         Bregistar.setForeground(new java.awt.Color(0, 0, 153));
         Bregistar.setText("Registrarse");
         Bregistar.setBorder(null);
+        Bregistar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BregistarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -90,12 +95,12 @@ public class InicioSesion extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setBackground(new java.awt.Color(153, 153, 153));
-        jButton1.setText("Enviar");
-        jButton1.setBorder(null);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        Benviar.setBackground(new java.awt.Color(153, 153, 153));
+        Benviar.setText("Enviar");
+        Benviar.setBorder(null);
+        Benviar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                BenviarActionPerformed(evt);
             }
         });
 
@@ -109,7 +114,7 @@ public class InicioSesion extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Benviar, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(96, 96, 96))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(118, 118, 118)
@@ -134,7 +139,7 @@ public class InicioSesion extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(TAcontrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(51, 51, 51)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Benviar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(143, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel2Layout.createSequentialGroup()
@@ -172,9 +177,17 @@ public class InicioSesion extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_TAemailActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void BenviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BenviarActionPerformed
+        Menu m = new Menu();
+        m.setVisible(true);
+        m.dispose();
+    }//GEN-LAST:event_BenviarActionPerformed
+
+    private void BregistarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BregistarActionPerformed
+        Registrarse registrarse = new Registrarse();
+        registrarse.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_BregistarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -215,11 +228,11 @@ public class InicioSesion extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Benviar;
     private javax.swing.JButton Bregistar;
     private javax.swing.JTextField TAcontrasena;
     private javax.swing.JTextField TAemail;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

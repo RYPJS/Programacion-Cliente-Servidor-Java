@@ -1,7 +1,9 @@
 package com.mycompany.fideairlines.Client.Runable;
-
+import com.mycompany.fideairlines.Client.View.Menu;
 public class ClientApp {
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        Menu m = new Menu();
+        m.setVisible(true);
+        
     }
 }
