@@ -4,6 +4,8 @@
  */
 package com.mycompany.fideairlines.Client.View;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author danie
@@ -247,7 +249,21 @@ public class CuentaPersonal extends javax.swing.JFrame {
     }//GEN-LAST:event_TAnombreActionPerformed
 
     private void BguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BguardarActionPerformed
-        // TODO add your handling code here:
+    if (TAnombre.getText().isEmpty() || TAemail.getText().isEmpty()){
+        JOptionPane.showMessageDialog(null, "Uno o más campos vacíos", "Advertencia", JOptionPane.WARNING_MESSAGE);
+    }
+    else{
+        if (TAemail.getText().contains("@")){
+            //Continuar codigo aqui
+            JOptionPane.showMessageDialog(null, "test");
+            Menu m = new Menu();
+            m.setVisible(true);
+            m.dispose();
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Asegurese de que el campo de email sea válido (ejemplo person@gmail.com)", "Advertencia", JOptionPane.WARNING_MESSAGE);
+        }
+    }
     }//GEN-LAST:event_BguardarActionPerformed
 
     private void Bguardar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Bguardar1ActionPerformed

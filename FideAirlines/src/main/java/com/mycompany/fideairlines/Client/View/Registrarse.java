@@ -4,6 +4,8 @@
  */
 package com.mycompany.fideairlines.Client.View;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author danie
@@ -197,7 +199,22 @@ public class Registrarse extends javax.swing.JFrame {
     }//GEN-LAST:event_TAemailActionPerformed
 
     private void BenviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BenviarActionPerformed
-        // TODO add your handling code here:
+    if (TAnombre.getText().isEmpty() || TAemail.getText().isEmpty() || TAcontrasena.getText().isEmpty()){
+        JOptionPane.showMessageDialog(null, "Uno o más campos vacíos", "Advertencia", JOptionPane.WARNING_MESSAGE);
+    }
+    else{
+        if (TAemail.getText().contains("@")){
+            //Continuar codigo aqui
+            JOptionPane.showMessageDialog(null, "test");
+            InicioSesion is = new InicioSesion();
+            is.setVisible(true);
+            this.dispose();
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Asegurese de que el campo de email sea válido (ejemplo person@gmail.com)", "Advertencia", JOptionPane.WARNING_MESSAGE);
+        }
+    }
+        
     }//GEN-LAST:event_BenviarActionPerformed
 
     private void TAnombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TAnombreActionPerformed

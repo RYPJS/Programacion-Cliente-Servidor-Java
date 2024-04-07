@@ -4,6 +4,8 @@
  */
 package com.mycompany.fideairlines.Client.View;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author kenda
@@ -178,9 +180,22 @@ public class InicioSesion extends javax.swing.JFrame {
     }//GEN-LAST:event_TAemailActionPerformed
 
     private void BenviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BenviarActionPerformed
-        Menu m = new Menu();
-        m.setVisible(true);
-        m.dispose();
+        
+    if (TAemail.getText().isEmpty() || TAcontrasena.getText().isEmpty()){
+        JOptionPane.showMessageDialog(null, "Uno o más campos vacíos", "Advertencia", JOptionPane.WARNING_MESSAGE);
+    }
+    else{
+        if (TAemail.getText().contains("@")){
+            //Continuar codigo aqui
+            JOptionPane.showMessageDialog(null, "test");
+            Menu m = new Menu();
+            m.setVisible(true);
+            this.dispose();
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Asegurese de que el campo de email sea válido (ejemplo person@gmail.com)", "Advertencia", JOptionPane.WARNING_MESSAGE);
+        }
+    }
     }//GEN-LAST:event_BenviarActionPerformed
 
     private void BregistarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BregistarActionPerformed
