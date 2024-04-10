@@ -1,24 +1,22 @@
 package com.mycompany.fideairlines.Server.Entities;
 
 public class Chat {
-    private int id;
+    private Passager emisor;
     private String mensaje;
     private int clienteId;
 
-    // Constructor
-    public Chat(int id, String mensaje, int clienteId) {
-        this.id = id;
+    public Chat(Passager emisor, String mensaje, int clienteId) {
+        this.emisor = emisor;
         this.mensaje = mensaje;
         this.clienteId = clienteId;
     }
 
-    // Getters y setters
-    public int getId() {
-        return id;
+    public Passager getEmisor() {
+        return emisor;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setEmisor(Passager emisor) {
+        this.emisor = emisor;
     }
 
     public String getMensaje() {
@@ -36,4 +34,5 @@ public class Chat {
     public void setClienteId(int clienteId) {
         this.clienteId = clienteId;
     }
+    
 }

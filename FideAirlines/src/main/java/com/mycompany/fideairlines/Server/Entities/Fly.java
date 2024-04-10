@@ -1,26 +1,27 @@
 package com.mycompany.fideairlines.Server.Entities;
+import com.mycompany.fideairlines.Server.Utils.PaymentMethods;
+import com.mycompany.fideairlines.Server.Utils.Category;
 import java.util.Date;
 
 public  class Fly {    private int numeroVuelo;
     private Date fechaSalida;
     private Date fechaEntrada;
-    private String clase;
+    private Category clase;
     private double precio;
     private int destinoId;
-    private int aerolineaId;
+    private PaymentMethods pago;
 
-    // Constructor
-    public Fly(int numeroVuelo, Date fechaSalida, Date fechaEntrada, String clase, double precio, int destinoId, int aerolineaId) {
+    public Fly(int numeroVuelo, Date fechaSalida, Date fechaEntrada, Category clase, double precio, int destinoId, PaymentMethods pago) {
         this.numeroVuelo = numeroVuelo;
         this.fechaSalida = fechaSalida;
         this.fechaEntrada = fechaEntrada;
         this.clase = clase;
         this.precio = precio;
         this.destinoId = destinoId;
-        this.aerolineaId = aerolineaId;
+        this.pago = pago;
     }
 
-    // Getters y setters
+    
     public int getNumeroVuelo() {
         return numeroVuelo;
     }
@@ -45,11 +46,11 @@ public  class Fly {    private int numeroVuelo;
         this.fechaEntrada = fechaEntrada;
     }
 
-    public String getClase() {
+    public Category getClase() {
         return clase;
     }
 
-    public void setClase(String clase) {
+    public void setClase(Category clase) {
         this.clase = clase;
     }
 
@@ -69,11 +70,13 @@ public  class Fly {    private int numeroVuelo;
         this.destinoId = destinoId;
     }
 
-    public int getAerolineaId() {
-        return aerolineaId;
+    public PaymentMethods getPago() {
+        return pago;
     }
 
-    public void setAerolineaId(int aerolineaId) {
-        this.aerolineaId = aerolineaId;
+    public void setPago(PaymentMethods pago) {
+        this.pago = pago;
     }
+    
+    
 }

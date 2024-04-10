@@ -14,24 +14,24 @@ import javax.swing.JOptionPane;
  * @author kenda
  */
 public class DBconexion {
-      private static final String servidor = "localhost";
+
+    private static final String servidor = "localhost";
     private static final String schema = "eventos";
     private static final String usuario = "root";
     private static final String contrasena = "admin";
     private static final String driver = "jdbc:mysql";
-    
-    
-    public static Connection ConectarBD(){
-        
+
+    public static Connection ConectarBD() {
+
         Connection conexion = null;
-    
+
         try {
             //CREAMOS LA CONEXION CON LA BD
-            conexion =  DriverManager.getConnection(
-                    driver+"://"+servidor+"/"+schema+"?serverTimezone=UTC", usuario, contrasena);
+            conexion = DriverManager.getConnection(
+                    driver + "://" + servidor + "/" + schema + "?serverTimezone=UTC", usuario, contrasena);
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error: "+ex.getMessage());
-        }finally{
+            JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
+        } finally {
             return conexion;
         }
     }

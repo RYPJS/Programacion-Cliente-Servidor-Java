@@ -1,4 +1,4 @@
-package Server.Utils;
+package com.mycompany.fideairlines.Server.Utils;
 
 public enum PaymentMethods {
     CREDIT_CARD("Tarjeta de crédito"),

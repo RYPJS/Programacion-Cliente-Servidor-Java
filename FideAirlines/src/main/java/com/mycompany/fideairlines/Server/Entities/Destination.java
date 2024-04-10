@@ -5,14 +5,13 @@ public class Destination {
     private String nombre;
     private String horasViaje;
 
-    // Constructor
+    
     public Destination(int id, String nombre, String horasViaje) {
         this.id = id;
         this.nombre = nombre;
         this.horasViaje = horasViaje;
     }
 
-    // Getters y setters
     public int getId() {
         return id;
     }
