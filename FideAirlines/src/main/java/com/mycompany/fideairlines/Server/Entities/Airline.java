@@ -2,10 +2,10 @@ package com.mycompany.fideairlines.Server.Entities;
 
 public class Airline {
     private String nombre;
-    private String servicios;
+    private String[] servicios;
     private Destination[] destinos;
 
-    public Airline(String nombre, String servicios, Destination[] destinos) {
+    public Airline(String nombre, String[] servicios, Destination[] destinos) {
         this.nombre = nombre;
         this.servicios = servicios;
         this.destinos = destinos;
@@ -19,11 +19,11 @@ public class Airline {
         this.nombre = nombre;
     }
 
-    public String getServicios() {
+    public String[] getServicios() {
         return servicios;
     }
 
-    public void setServicios(String servicios) {
+    public void setServicios(String[] servicios) {
         this.servicios = servicios;
     }
 
