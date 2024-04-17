@@ -3,6 +3,7 @@
 -- Host: localhost    Database: fideairlines
 -- ------------------------------------------------------
 -- Server version	8.3.0
+USE fideairlines;
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;

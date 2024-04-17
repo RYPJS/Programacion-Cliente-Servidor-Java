@@ -2,10 +2,20 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package com.mycompany.fideairlines.Client.View;
+package com.mycompany.fideairlines.Server.View;
 
+import com.mycompany.fideairlines.Server.Entities.Destination;
+import com.mycompany.fideairlines.Server.Entities.Fly;
+import com.mycompany.fideairlines.Server.Utils.Category;
+import com.mycompany.fideairlines.Server.Utils.DBconexion;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.JOptionPane;
 
 /**
@@ -15,8 +25,11 @@ import javax.swing.JOptionPane;
 public class RegistrarVuelos extends javax.swing.JFrame {
 
     SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
+
     public RegistrarVuelos() {
         initComponents();
+        cargarDestinos();
+
     }
 
     /**
@@ -38,13 +51,11 @@ public class RegistrarVuelos extends javax.swing.JFrame {
         TAnumvuelo = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        TAclase = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         TAprecio = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        TAdestino = new javax.swing.JTextField();
-        jLabel10 = new javax.swing.JLabel();
-        TAaereolinea = new javax.swing.JTextField();
+        CBclases = new javax.swing.JComboBox<>();
+        CBdestinos = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
@@ -99,14 +110,6 @@ public class RegistrarVuelos extends javax.swing.JFrame {
 
         jLabel7.setText("Clase:");
 
-        TAclase.setBackground(new java.awt.Color(89, 79, 79));
-        TAclase.setForeground(new java.awt.Color(255, 255, 255));
-        TAclase.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TAclaseActionPerformed(evt);
-            }
-        });
-
         jLabel8.setText("Precio:");
 
         TAprecio.setBackground(new java.awt.Color(89, 79, 79));
@@ -119,23 +122,14 @@ public class RegistrarVuelos extends javax.swing.JFrame {
 
         jLabel9.setText("Destino:");
 
-        TAdestino.setBackground(new java.awt.Color(89, 79, 79));
-        TAdestino.setForeground(new java.awt.Color(255, 255, 255));
-        TAdestino.addActionListener(new java.awt.event.ActionListener() {
+        CBclases.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Primera Clase", "Clase Business", "Clase Turista" }));
+        CBclases.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TAdestinoActionPerformed(evt);
+                CBclasesActionPerformed(evt);
             }
         });
 
-        jLabel10.setText("Aereolínea:");
-
-        TAaereolinea.setBackground(new java.awt.Color(89, 79, 79));
-        TAaereolinea.setForeground(new java.awt.Color(255, 255, 255));
-        TAaereolinea.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TAaereolineaActionPerformed(evt);
-            }
-        });
+        CBdestinos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -145,29 +139,26 @@ public class RegistrarVuelos extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(TAaereolinea, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
-                        .addGap(248, 248, 248))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel10)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(Benviar, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(50, 50, 50))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel9)
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(TAdestino, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
-                                .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(TAnumvuelo, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(TAfechasalida, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(TAfechaentrada, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(TAclase, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(TAprecio, javax.swing.GroupLayout.Alignment.LEADING)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(CBdestinos, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(CBclases, javax.swing.GroupLayout.Alignment.LEADING, 0, 220, Short.MAX_VALUE)
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel9)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(TAnumvuelo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
+                                    .addComponent(TAfechasalida, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(TAfechaentrada, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(TAprecio, javax.swing.GroupLayout.Alignment.LEADING))))
+                        .addContainerGap(286, Short.MAX_VALUE))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -187,23 +178,18 @@ public class RegistrarVuelos extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(TAclase, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(CBclases, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(TAprecio, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel9)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(TAdestino, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel10)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(TAaereolinea, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(Benviar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(CBdestinos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(8, 8, 8)
+                .addComponent(Benviar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(44, Short.MAX_VALUE))
         );
 
         jLabel6.setBackground(new java.awt.Color(255, 255, 255));
@@ -223,7 +209,7 @@ public class RegistrarVuelos extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(58, 58, 58)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -232,7 +218,7 @@ public class RegistrarVuelos extends javax.swing.JFrame {
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(72, Short.MAX_VALUE))
+                .addContainerGap(86, Short.MAX_VALUE))
         );
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -262,7 +248,7 @@ public class RegistrarVuelos extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 584, Short.MAX_VALUE)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
@@ -278,25 +264,103 @@ public class RegistrarVuelos extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BenviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BenviarActionPerformed
-    if (TAnumvuelo.getText().isEmpty() || TAfechasalida.getText().isEmpty() || TAfechaentrada.getText().isEmpty() || TAclase.getText().isEmpty()
-            || TAprecio.getText().isEmpty() || TAdestino.getText().isEmpty() || TAaereolinea.getText().isEmpty()){
-        JOptionPane.showMessageDialog(null, "Uno o más campos vacíos", "Advertencia", JOptionPane.WARNING_MESSAGE);
-    }
-    else{
-        formatoFecha.setLenient(false); // Evita fechas inválidas
-        try {
-            formatoFecha.parse(TAfechaentrada.getText());
-            formatoFecha.parse(TAfechasalida.getText());
-            JOptionPane.showMessageDialog(null, "test");
-            //Continuar acá
-        } catch (ParseException e) {
-            JOptionPane.showMessageDialog(null, "Formato de fecha inválido en alguna o ambas fechas. Asegurese que cumpla con dd/mm/yyyy", "Advertencia", JOptionPane.WARNING_MESSAGE);
-        }       
-    }
+        if (TAnumvuelo.getText().isEmpty() || TAfechasalida.getText().isEmpty() || TAfechaentrada.getText().isEmpty() || TAprecio.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Uno o más campos vacíos", "Advertencia", JOptionPane.WARNING_MESSAGE);
+        } else {
+            formatoFecha.setLenient(false); // Evita fechas inválidas
+            try {
+                formatoFecha.parse(TAfechaentrada.getText());
+                formatoFecha.parse(TAfechasalida.getText());
 
+                ArrayList<Destination> destinos = new ArrayList<>();
 
+                Connection nuevaConexion = DBconexion.ConectarBD();
+
+                String comando_Select = "SELECT id, nombre, horasViaje FROM destinos";
+                PreparedStatement nuevoStatamentPreparado = nuevaConexion.prepareStatement(comando_Select);
+
+                ResultSet rs = nuevoStatamentPreparado.executeQuery();
+
+                while (rs.next()) {
+                    int id = rs.getInt("id");
+                    String nombre = rs.getString("nombre");
+                    String horasViaje = rs.getString("horasViaje");
+                    Destination destino = new Destination(id, nombre, horasViaje);
+                    destinos.add(destino);
+                }
+
+                rs.close();
+                nuevoStatamentPreparado.close();
+                nuevaConexion.close();
+
+                int num = CBclases.getSelectedIndex();
+
+                int indexDestinoSeleccionado = CBdestinos.getSelectedIndex();
+
+                if (indexDestinoSeleccionado >= 0 && indexDestinoSeleccionado < destinos.size()) {
+                    Destination destinoSeleccionado = destinos.get(indexDestinoSeleccionado);
+
+                    if (num == 0) {
+                        Fly vuelo = new Fly(Integer.parseInt(TAnumvuelo.getText()), TAfechasalida.getText(), TAfechaentrada.getText(), Double.parseDouble(TAprecio.getText()), destinoSeleccionado.getNombre());
+                        vuelo.setClase(Category.FIRST_CLASS);
+                        vuelo.guardarVueloDB(vuelo);
+                    } else if (num == 1) {
+                        Fly vuelo = new Fly(Integer.parseInt(TAnumvuelo.getText()), TAfechasalida.getText(), TAfechaentrada.getText(), Double.parseDouble(TAprecio.getText()), destinoSeleccionado.getNombre());
+                        vuelo.setClase(Category.BUSINESS);
+                        vuelo.guardarVueloDB(vuelo);
+                    } else {
+                        Fly vuelo = new Fly(Integer.parseInt(TAnumvuelo.getText()), TAfechasalida.getText(), TAfechaentrada.getText(), Double.parseDouble(TAprecio.getText()), destinoSeleccionado.getNombre());
+                        vuelo.setClase(Category.ECONOMY);
+                        vuelo.guardarVueloDB(vuelo);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "El destino seleccionado no fue encontrado en la base de datos", "Advertencia", JOptionPane.WARNING_MESSAGE);
+                }
+            } catch (SQLException | ParseException e) {
+                JOptionPane.showMessageDialog(null, "Ha ocurrido un error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
     }//GEN-LAST:event_BenviarActionPerformed
+    private void cargarDestinos() {
+        try {
+            // Creamos la conexión con la base de datos
+            Connection nuevaConexion = DBconexion.ConectarBD();
 
+            // Definimos el comando para obtener los destinos
+            String comando_Select = "SELECT id, nombre, horasViaje FROM destinos";
+            PreparedStatement nuevoStatamentPreparado = nuevaConexion.prepareStatement(comando_Select);
+
+            // Ejecutamos la consulta
+            ResultSet rs = nuevoStatamentPreparado.executeQuery();
+
+            // Creamos un ArrayList para almacenar los destinos
+            ArrayList<Destination> destinos = new ArrayList<>();
+
+            // Recorremos los resultados y creamos objetos Destination
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String nombre = rs.getString("nombre");
+                String horasViaje = rs.getString("horasViaje");
+                Destination destino = new Destination(id, nombre, horasViaje);
+                destinos.add(destino);
+            }
+
+            // Cerramos la conexión y los recursos
+            rs.close();
+            nuevoStatamentPreparado.close();
+            nuevaConexion.close();
+
+            // Limpiamos el JComboBox CBdestinos
+            CBdestinos.removeAllItems();
+
+            // Agregamos los destinos al JComboBox CBdestinos
+            for (Destination destino : destinos) {
+                CBdestinos.addItem(destino.getNombre()); // Agregar objetos Destination directamente
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "No se pudo cargar los destinos. Error: " + ex.getMessage());
+        }
+    }
     private void TAfechaentradaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TAfechaentradaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_TAfechaentradaActionPerformed
@@ -309,21 +373,13 @@ public class RegistrarVuelos extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_TAnumvueloActionPerformed
 
-    private void TAclaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TAclaseActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TAclaseActionPerformed
-
     private void TAprecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TAprecioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_TAprecioActionPerformed
 
-    private void TAdestinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TAdestinoActionPerformed
+    private void CBclasesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CBclasesActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_TAdestinoActionPerformed
-
-    private void TAaereolineaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TAaereolineaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TAaereolineaActionPerformed
+    }//GEN-LAST:event_CBclasesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -362,14 +418,12 @@ public class RegistrarVuelos extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Benviar;
-    private javax.swing.JTextField TAaereolinea;
-    private javax.swing.JTextField TAclase;
-    private javax.swing.JTextField TAdestino;
+    private javax.swing.JComboBox<String> CBclases;
+    private javax.swing.JComboBox<String> CBdestinos;
     private javax.swing.JTextField TAfechaentrada;
     private javax.swing.JTextField TAfechasalida;
     private javax.swing.JTextField TAnumvuelo;
     private javax.swing.JTextField TAprecio;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

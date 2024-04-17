@@ -235,7 +235,7 @@ public class LogInEmpleados extends javax.swing.JFrame {
                 if (!admin.buscarEmpleado(admin)) {
                     JOptionPane.showMessageDialog(null, "Usuario no encontrado, cree una cuenta");
                 } else {
-                    ServerChat m = new ServerChat();
+                    MenuServer m = new MenuServer();
                     m.setVisible(true);
                     this.dispose();
                 }
