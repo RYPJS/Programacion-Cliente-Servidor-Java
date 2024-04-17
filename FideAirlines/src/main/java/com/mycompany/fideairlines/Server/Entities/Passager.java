@@ -19,10 +19,10 @@ public class Passager extends Person {
     public Passager() {
     }
 
-    public Passager( String email) {
-        super( email);
+    public Passager(String email) {
+        super(email);
     }
-    
+
     public Passager(String[] historial, Map<String, String> preferencias, int vueloId, boolean reserva) {
         this.historial = historial;
         this.preferencias = preferencias;
@@ -69,10 +69,10 @@ public class Passager extends Person {
         try {
             Connection nuevaConexion = DBconexion.ConectarBD();
 
-            String comandoSelect = "SELECT * FROM clientes WHERE NOMBRE = ? OR EMAIL = ?";
+            String comandoSelect = "SELECT * FROM clientes WHERE EMAIL = ? AND CONTRASENA = ?";
             PreparedStatement nuevoStatementPreparado = nuevaConexion.prepareStatement(comandoSelect);
-            nuevoStatementPreparado.setString(1, cliente.getNombre());
-            nuevoStatementPreparado.setString(2, cliente.getEmail());
+            nuevoStatementPreparado.setString(1, cliente.getEmail()); 
+            nuevoStatementPreparado.setString(2, cliente.getContrasena());
 
             ResultSet resultado = nuevoStatementPreparado.executeQuery();
 

@@ -2,21 +2,22 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package com.mycompany.fideairlines.Client.View;
+package com.mycompany.fideairlines.Server.View;
 
 import com.mycompany.fideairlines.Server.Entities.Admin;
+import com.mycompany.fideairlines.Server.Entities.Passager;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author kenda
  */
-public class LogInEmpleados extends javax.swing.JFrame {
+public class RegistrarEmpleado extends javax.swing.JFrame {
 
     /**
-     * Creates new form LogInEmpleados
+     * Creates new form RegistrarEmpleado
      */
-    public LogInEmpleados() {
+    public RegistrarEmpleado() {
         initComponents();
     }
 
@@ -29,22 +30,21 @@ public class LogInEmpleados extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel4 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        Bregistrarse = new javax.swing.JButton();
+        BiniciarSesion = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
-        TAnumeroEmpleado = new javax.swing.JTextField();
+        Benviar = new javax.swing.JButton();
+        TAnumero = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        TAemailEmpleado = new javax.swing.JTextField();
+        TAnombre = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        TAemail = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        TAcontrasenaEmpleado = new javax.swing.JTextField();
-        Benviar = new javax.swing.JButton();
-
-        jLabel4.setText("Ingrese su contraseña");
+        TAcontrasena1 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -54,17 +54,17 @@ public class LogInEmpleados extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel1.setText("FideAirline");
 
-        Bregistrarse.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        Bregistrarse.setForeground(new java.awt.Color(0, 0, 153));
-        Bregistrarse.setText("registrarse");
-        Bregistrarse.setBorder(null);
-        Bregistrarse.addActionListener(new java.awt.event.ActionListener() {
+        BiniciarSesion.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        BiniciarSesion.setForeground(new java.awt.Color(0, 0, 153));
+        BiniciarSesion.setText("Iniciar sesión");
+        BiniciarSesion.setBorder(null);
+        BiniciarSesion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BregistrarseActionPerformed(evt);
+                BiniciarSesionActionPerformed(evt);
             }
         });
 
-        jLabel5.setText("¿Sin cuenta?");
+        jLabel5.setText("¿Ya tienes cuenta?");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -73,13 +73,13 @@ public class LogInEmpleados extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 166, Short.MAX_VALUE)
-                .addComponent(Bregistrarse, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(BiniciarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(25, 25, 25))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel5)
-                .addGap(51, 51, 51))
+                .addGap(40, 40, 40))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -89,7 +89,7 @@ public class LogInEmpleados extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
-                    .addComponent(Bregistrarse, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(BiniciarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(38, Short.MAX_VALUE))
         );
 
@@ -97,36 +97,6 @@ public class LogInEmpleados extends javax.swing.JFrame {
         jPanel2.setFocusCycleRoot(true);
 
         jPanel3.setBackground(new java.awt.Color(217, 217, 217));
-
-        TAnumeroEmpleado.setBackground(new java.awt.Color(89, 79, 79));
-        TAnumeroEmpleado.setForeground(new java.awt.Color(255, 255, 255));
-        TAnumeroEmpleado.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TAnumeroEmpleadoActionPerformed(evt);
-            }
-        });
-
-        jLabel3.setText("Ingrese su contraseña");
-
-        TAemailEmpleado.setBackground(new java.awt.Color(89, 79, 79));
-        TAemailEmpleado.setForeground(new java.awt.Color(255, 255, 255));
-        TAemailEmpleado.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TAemailEmpleadoActionPerformed(evt);
-            }
-        });
-
-        jLabel2.setText("Ingrese su correo electrónico");
-
-        jLabel6.setText("Ingrese su contraseña");
-
-        TAcontrasenaEmpleado.setBackground(new java.awt.Color(89, 79, 79));
-        TAcontrasenaEmpleado.setForeground(new java.awt.Color(255, 255, 255));
-        TAcontrasenaEmpleado.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TAcontrasenaEmpleadoActionPerformed(evt);
-            }
-        });
 
         Benviar.setBackground(new java.awt.Color(153, 153, 153));
         Benviar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -139,43 +109,92 @@ public class LogInEmpleados extends javax.swing.JFrame {
             }
         });
 
+        TAnumero.setBackground(new java.awt.Color(89, 79, 79));
+        TAnumero.setForeground(new java.awt.Color(255, 255, 255));
+        TAnumero.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TAnumeroActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setText("Ingrese su contraseña");
+
+        TAnombre.setBackground(new java.awt.Color(89, 79, 79));
+        TAnombre.setForeground(new java.awt.Color(255, 255, 255));
+        TAnombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TAnombreActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setText("Ingrese su nombre completo");
+
+        TAemail.setBackground(new java.awt.Color(89, 79, 79));
+        TAemail.setForeground(new java.awt.Color(255, 255, 255));
+        TAemail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TAemailActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("Ingrese su correo electrónico");
+
+        jLabel6.setText("Ingrese su numero de empleado");
+
+        TAcontrasena1.setBackground(new java.awt.Color(89, 79, 79));
+        TAcontrasena1.setForeground(new java.awt.Color(255, 255, 255));
+        TAcontrasena1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TAcontrasena1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(TAcontrasenaEmpleado, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
-                    .addComponent(TAnumeroEmpleado)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3)
-                    .addComponent(TAemailEmpleado))
-                .addContainerGap(105, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(Benviar, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(Benviar, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(29, 29, 29))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel6)
+                                .addComponent(jLabel2)
+                                .addComponent(jLabel4)
+                                .addComponent(jLabel3)
+                                .addComponent(TAemail, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
+                                .addComponent(TAnombre)
+                                .addComponent(TAcontrasena1))
+                            .addComponent(TAnumero, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(213, Short.MAX_VALUE))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGap(42, 42, 42)
+                .addGap(20, 20, 20)
                 .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(TAemail, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(TAemailEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(TAnombre, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
                 .addGap(18, 18, 18)
-                .addComponent(TAcontrasenaEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(TAcontrasena1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel6)
-                .addGap(18, 18, 18)
-                .addComponent(TAnumeroEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(TAnumero, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(Benviar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addGap(41, 41, 41))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -192,7 +211,7 @@ public class LogInEmpleados extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(45, 45, 45)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(120, Short.MAX_VALUE))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -213,47 +232,51 @@ public class LogInEmpleados extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void BregistrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BregistrarseActionPerformed
-        Registrarse r = new Registrarse();
-        r.setVisible(true);
+    private void BiniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BiniciarSesionActionPerformed
+        LogInEmpleados is = new LogInEmpleados();
+        is.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_BregistrarseActionPerformed
+    }//GEN-LAST:event_BiniciarSesionActionPerformed
 
     private void BenviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BenviarActionPerformed
-        Admin cliente = new Admin();
-        if (TAemailEmpleado.getText().isEmpty() || TAnumeroEmpleado.getText().isEmpty()) {
+        if (TAnombre.getText().isEmpty() || TAemail.getText().isEmpty() || TAnumero.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Uno o más campos vacíos", "Advertencia", JOptionPane.WARNING_MESSAGE);
         } else {
-            if (TAemailEmpleado.getText().contains("@")) {
-                cliente.setEmail(TAemailEmpleado.getText());
-                cliente.setContrasena(TAnumeroEmpleado.getText());
-                if (cliente.buscarEmpleado(cliente) == false) {
-                    JOptionPane.showMessageDialog(null, "Usuario no encotrado, Cree una cuenta");
-                    Registrarse r = new Registrarse();
-                    r.setVisible(true);
-                    this.dispose();
-                } else {
-                    Menu m = new Menu();
-                    m.setVisible(true);
-                    this.dispose();
-                }
+            if (TAemail.getText().contains("@")) {
+                //Continuar codigo aqui
+                Admin admin = new Admin();
+
+                admin.setEmail(TAemail.getText());
+                admin.setNombre(TAnombre.getText());
+                admin.setContrasena(TAcontrasena1.getText());
+                admin.setNumeroEmpleado(Integer.parseInt(TAnumero.getText()));
+
+                admin.crearEmpleado(admin);
+
+                LogInEmpleados is = new LogInEmpleados();
+                is.setVisible(true);
+                this.dispose();
             } else {
                 JOptionPane.showMessageDialog(null, "Asegurese de que el campo de email sea válido (ejemplo person@gmail.com)", "Advertencia", JOptionPane.WARNING_MESSAGE);
             }
         }
     }//GEN-LAST:event_BenviarActionPerformed
 
-    private void TAnumeroEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TAnumeroEmpleadoActionPerformed
+    private void TAnumeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TAnumeroActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_TAnumeroEmpleadoActionPerformed
+    }//GEN-LAST:event_TAnumeroActionPerformed
 
-    private void TAemailEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TAemailEmpleadoActionPerformed
+    private void TAnombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TAnombreActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_TAemailEmpleadoActionPerformed
+    }//GEN-LAST:event_TAnombreActionPerformed
 
-    private void TAcontrasenaEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TAcontrasenaEmpleadoActionPerformed
+    private void TAemailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TAemailActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_TAcontrasenaEmpleadoActionPerformed
+    }//GEN-LAST:event_TAemailActionPerformed
+
+    private void TAcontrasena1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TAcontrasena1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TAcontrasena1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -272,30 +295,31 @@ public class LogInEmpleados extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(LogInEmpleados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegistrarEmpleado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(LogInEmpleados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegistrarEmpleado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(LogInEmpleados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegistrarEmpleado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(LogInEmpleados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegistrarEmpleado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new LogInEmpleados().setVisible(true);
+                new RegistrarEmpleado().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Benviar;
-    private javax.swing.JButton Bregistrarse;
-    private javax.swing.JTextField TAcontrasenaEmpleado;
-    private javax.swing.JTextField TAemailEmpleado;
-    private javax.swing.JTextField TAnumeroEmpleado;
+    private javax.swing.JButton BiniciarSesion;
+    private javax.swing.JTextField TAcontrasena1;
+    private javax.swing.JTextField TAemail;
+    private javax.swing.JTextField TAnombre;
+    private javax.swing.JTextField TAnumero;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
