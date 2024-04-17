@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
 public class DBconexion {
 
     private static final String servidor = "localhost";
-    private static final String schema = "eventos";
+    private static final String schema = "fideairlines";
     private static final String usuario = "root";
     private static final String contrasena = "admin";
     private static final String driver = "jdbc:mysql";

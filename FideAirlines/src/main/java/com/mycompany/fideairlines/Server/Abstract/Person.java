@@ -9,6 +9,11 @@ public abstract class Person {
     public Person() {
     }
 
+    public Person( String email) {
+        this.email = email;
+    }
+    
+
     public Person(String nombre, String email, String contrasena, String numeroTelefono) {
         this.nombre = nombre;
         this.email = email;

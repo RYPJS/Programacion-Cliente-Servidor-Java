@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.mycompany.fideairlines.Client.View;
+import com.mycompany.fideairlines.Server.Entities.Passager;
 import javax.swing.JOptionPane;
 /**
  *
@@ -196,16 +197,21 @@ public class InicioSesion extends javax.swing.JFrame {
     }//GEN-LAST:event_BregistrarseActionPerformed
 
     private void BenviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BenviarActionPerformed
+        Passager cliente = new Passager();
         if (TAemail.getText().isEmpty() || TAcontrasena.getText().isEmpty()){
             JOptionPane.showMessageDialog(null, "Uno o más campos vacíos", "Advertencia", JOptionPane.WARNING_MESSAGE);
         }
         else{
             if (TAemail.getText().contains("@")){
-                //Continuar codigo aqui
-                JOptionPane.showMessageDialog(null, "test");
+                cliente.setEmail(TAemail.getText());
+                cliente.setContrasena(TAcontrasena.getText());
+                if(cliente.buscarCliente(cliente) == false){
+                    JOptionPane.showMessageDialog(null, "Usuario no encotrado, Cree una cuenta");
+                }else{
+                
                 Menu m = new Menu();
                 m.setVisible(true);
-                this.dispose();
+                this.dispose();}
             }
             else{
                 JOptionPane.showMessageDialog(null, "Asegurese de que el campo de email sea válido (ejemplo person@gmail.com)", "Advertencia", JOptionPane.WARNING_MESSAGE);
