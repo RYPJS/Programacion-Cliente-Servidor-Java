@@ -165,7 +165,11 @@ public class Menu extends javax.swing.JFrame {
         cp.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_mCuentaPersonalMouseClicked
-
+    private void mChatEnVivo(java.awt.event.MouseEvent evt){
+        ChatEnVivo cp = new ChatEnVivo();
+        cp.setVisible(true);
+        this.dispose();
+    }
     /**
      * @param args the command line arguments
      */

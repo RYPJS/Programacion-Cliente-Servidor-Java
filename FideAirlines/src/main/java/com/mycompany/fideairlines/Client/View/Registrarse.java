@@ -4,6 +4,9 @@
  */
 package com.mycompany.fideairlines.Client.View;
 
+import com.mycompany.fideairlines.Server.Entities.Passager;
+import java.util.HashMap;
+import java.util.Map;
 import javax.swing.JOptionPane;
 
 /**
@@ -36,12 +39,14 @@ public class Registrarse extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         Benviar = new javax.swing.JButton();
-        TAcontrasena = new javax.swing.JTextField();
+        TAnumero = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         TAnombre = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         TAemail = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        TAcontrasena1 = new javax.swing.JTextField();
 
         jCheckBoxMenuItem1.setSelected(true);
         jCheckBoxMenuItem1.setText("jCheckBoxMenuItem1");
@@ -110,11 +115,11 @@ public class Registrarse extends javax.swing.JFrame {
             }
         });
 
-        TAcontrasena.setBackground(new java.awt.Color(89, 79, 79));
-        TAcontrasena.setForeground(new java.awt.Color(255, 255, 255));
-        TAcontrasena.addActionListener(new java.awt.event.ActionListener() {
+        TAnumero.setBackground(new java.awt.Color(89, 79, 79));
+        TAnumero.setForeground(new java.awt.Color(255, 255, 255));
+        TAnumero.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TAcontrasenaActionPerformed(evt);
+                TAnumeroActionPerformed(evt);
             }
         });
 
@@ -140,41 +145,60 @@ public class Registrarse extends javax.swing.JFrame {
 
         jLabel2.setText("Ingrese su correo electrónico");
 
+        jLabel6.setText("Ingrese su numero de telefono");
+
+        TAcontrasena1.setBackground(new java.awt.Color(89, 79, 79));
+        TAcontrasena1.setForeground(new java.awt.Color(255, 255, 255));
+        TAcontrasena1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TAcontrasena1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel3)
-                    .addComponent(TAemail, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
-                    .addComponent(TAnombre)
-                    .addComponent(TAcontrasena))
-                .addContainerGap(213, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(Benviar, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(Benviar, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(29, 29, 29))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel6)
+                                .addComponent(jLabel2)
+                                .addComponent(jLabel4)
+                                .addComponent(jLabel3)
+                                .addComponent(TAemail, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
+                                .addComponent(TAnombre)
+                                .addComponent(TAcontrasena1))
+                            .addComponent(TAnumero, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(213, Short.MAX_VALUE))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGap(42, 42, 42)
+                .addGap(20, 20, 20)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(TAemail, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(TAemail, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(TAnombre, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(TAcontrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addComponent(jLabel3)
+                .addGap(18, 18, 18)
+                .addComponent(TAcontrasena1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(TAnumero, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(Benviar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(41, 41, 41))
         );
@@ -186,7 +210,7 @@ public class Registrarse extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(42, 42, 42)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addContainerGap(53, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -214,31 +238,41 @@ public class Registrarse extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void TAcontrasenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TAcontrasenaActionPerformed
+    private void TAnumeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TAnumeroActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_TAcontrasenaActionPerformed
+    }//GEN-LAST:event_TAnumeroActionPerformed
 
     private void TAemailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TAemailActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_TAemailActionPerformed
 
     private void BenviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BenviarActionPerformed
-    if (TAnombre.getText().isEmpty() || TAemail.getText().isEmpty() || TAcontrasena.getText().isEmpty()){
-        JOptionPane.showMessageDialog(null, "Uno o más campos vacíos", "Advertencia", JOptionPane.WARNING_MESSAGE);
-    }
-    else{
-        if (TAemail.getText().contains("@")){
-            //Continuar codigo aqui
-            JOptionPane.showMessageDialog(null, "test");
-            InicioSesion is = new InicioSesion();
-            is.setVisible(true);
-            this.dispose();
+        if (TAnombre.getText().isEmpty() || TAemail.getText().isEmpty() || TAnumero.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Uno o más campos vacíos", "Advertencia", JOptionPane.WARNING_MESSAGE);
+        } else {
+            if (TAemail.getText().contains("@")) {
+                //Continuar codigo aqui
+                Passager nCliente = new Passager();
+                String[] historial = new String[90];
+                Map<String, String> preferencias = new HashMap<>();
+
+                nCliente.setEmail(TAemail.getText());
+                nCliente.setNombre(TAnombre.getText());
+                nCliente.setContrasena(TAcontrasena1.getText());
+                nCliente.setNumeroTelefono(TAnumero.getText());
+                nCliente.setHistorial(historial);
+                nCliente.setPreferencias(preferencias);
+                
+                nCliente.crearCliente(nCliente);
+                
+                InicioSesion is = new InicioSesion();
+                is.setVisible(true);
+                this.dispose();
+            } else {
+                JOptionPane.showMessageDialog(null, "Asegurese de que el campo de email sea válido (ejemplo person@gmail.com)", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            }
         }
-        else{
-            JOptionPane.showMessageDialog(null, "Asegurese de que el campo de email sea válido (ejemplo person@gmail.com)", "Advertencia", JOptionPane.WARNING_MESSAGE);
-        }
-    }
-        
+
     }//GEN-LAST:event_BenviarActionPerformed
 
     private void TAnombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TAnombreActionPerformed
@@ -250,6 +284,10 @@ public class Registrarse extends javax.swing.JFrame {
         is.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_BiniciarSesionActionPerformed
+
+    private void TAcontrasena1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TAcontrasena1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TAcontrasena1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -289,15 +327,17 @@ public class Registrarse extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Benviar;
     private javax.swing.JButton BiniciarSesion;
-    private javax.swing.JTextField TAcontrasena;
+    private javax.swing.JTextField TAcontrasena1;
     private javax.swing.JTextField TAemail;
     private javax.swing.JTextField TAnombre;
+    private javax.swing.JTextField TAnumero;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
