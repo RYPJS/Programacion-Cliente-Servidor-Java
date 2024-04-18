@@ -26,6 +26,8 @@ public class ServerChat extends javax.swing.JFrame {
         HiloServidor hilo = new HiloServidor(JLmensajeCliente, TAmensajeServer);
         hilo.start();
     }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -70,17 +72,21 @@ public class ServerChat extends javax.swing.JFrame {
                 .addContainerGap(37, Short.MAX_VALUE))
         );
 
-        jPanel2.setBackground(new java.awt.Color(153, 153, 153));
+        jPanel2.setBackground(new java.awt.Color(0, 180, 255));
         jPanel2.setFocusCycleRoot(true);
 
-        jLabel1.setText("Cliente");
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Contactando al cliente");
 
         TAmensajeServer.setColumns(20);
         TAmensajeServer.setRows(5);
         TAmensajeServer.setText("Inserte un mensaje...\n");
         jScrollPane2.setViewportView(TAmensajeServer);
 
-        Benviar1.setBackground(new java.awt.Color(153, 153, 153));
+        Benviar1.setBackground(new java.awt.Color(0, 102, 153));
+        Benviar1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        Benviar1.setForeground(new java.awt.Color(255, 255, 255));
         Benviar1.setText("Enviar");
         Benviar1.setBorder(null);
         Benviar1.addActionListener(new java.awt.event.ActionListener() {
@@ -88,6 +94,9 @@ public class ServerChat extends javax.swing.JFrame {
                 Benviar1ActionPerformed(evt);
             }
         });
+
+        JLmensajeCliente.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        JLmensajeCliente.setForeground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -147,7 +156,7 @@ public class ServerChat extends javax.swing.JFrame {
 
     private void Benviar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Benviar1ActionPerformed
         try {
-            Socket clientSocket = new Socket("127.0.0.1", 10578); // Cambiar al puerto del cliente
+            Socket clientSocket = new Socket("localhost", 10579); // Cambiar al puerto del cliente
             ObjectOutputStream objectOutput = new ObjectOutputStream(clientSocket.getOutputStream());
             Mensaje mensaje = new Mensaje(TAmensajeServer.getText(), "server");
             objectOutput.writeObject(mensaje);
@@ -156,6 +165,8 @@ public class ServerChat extends javax.swing.JFrame {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+        
+        
     }//GEN-LAST:event_Benviar1ActionPerformed
 
     /**

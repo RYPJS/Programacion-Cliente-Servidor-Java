@@ -4,7 +4,9 @@
  */
 package com.mycompany.fideairlines.Client.View;
 
+import com.mycompany.fideairlines.Server.Entities.HiloCliente;
 import com.mycompany.fideairlines.Server.Entities.Mensaje;
+import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
@@ -22,6 +24,8 @@ public class ChatEnVivo extends javax.swing.JFrame {
      */
     public ChatEnVivo() {
         initComponents();
+        HiloCliente hilo = new HiloCliente(JLmensajeCliente, TAmensajeCliente);
+        hilo.start();
     }
 
     /**
@@ -55,7 +59,7 @@ public class ChatEnVivo extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel2.setBackground(new java.awt.Color(153, 153, 153));
+        jPanel2.setBackground(new java.awt.Color(0, 180, 255));
         jPanel2.setFocusCycleRoot(true);
 
         TAmensajeCliente.setColumns(20);
@@ -63,9 +67,13 @@ public class ChatEnVivo extends javax.swing.JFrame {
         TAmensajeCliente.setText("Inserte un mensaje...");
         jScrollPane1.setViewportView(TAmensajeCliente);
 
-        jLabel2.setText("Soporte");
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Contactando al soporte");
 
-        Benviar1.setBackground(new java.awt.Color(153, 153, 153));
+        Benviar1.setBackground(new java.awt.Color(0, 102, 153));
+        Benviar1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        Benviar1.setForeground(new java.awt.Color(255, 255, 255));
         Benviar1.setText("Enviar");
         Benviar1.setBorder(null);
         Benviar1.addActionListener(new java.awt.event.ActionListener() {
@@ -74,6 +82,10 @@ public class ChatEnVivo extends javax.swing.JFrame {
             }
         });
 
+        JLmensajeCliente.setBackground(new java.awt.Color(255, 255, 255));
+        JLmensajeCliente.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        JLmensajeCliente.setForeground(new java.awt.Color(255, 255, 255));
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -81,27 +93,27 @@ public class ChatEnVivo extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(551, 551, 551)
-                        .addComponent(jLabel2))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(46, 46, 46)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 405, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(29, 29, 29)
-                        .addComponent(Benviar1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(18, Short.MAX_VALUE))
+                        .addComponent(Benviar1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(54, 54, 54)
+                        .addComponent(JLmensajeCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 485, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(51, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(JLmensajeCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 485, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jLabel2)
+                .addGap(15, 15, 15))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel2)
-                .addGap(18, 18, 18)
+                .addGap(29, 29, 29)
                 .addComponent(JLmensajeCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(Benviar1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -176,7 +188,7 @@ public class ChatEnVivo extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(0, 8, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -186,7 +198,7 @@ public class ChatEnVivo extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -220,17 +232,19 @@ public class ChatEnVivo extends javax.swing.JFrame {
 
     private void Benviar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Benviar1ActionPerformed
         try {
-            Socket vNuevoSocket = new Socket("127.0.0.1", 10578);
+            Socket vNuevoSocket = new Socket("localhost", 10578);
 
             ObjectOutputStream vObjectOutput = new ObjectOutputStream(vNuevoSocket.getOutputStream());
             Mensaje mensaje = new Mensaje(TAmensajeCliente.getText(),"cliente");
             vObjectOutput.writeObject(mensaje);
-
+            
             vObjectOutput.close();
             vNuevoSocket.close();
         } catch (Exception ex) {
             Logger.getLogger(ChatEnVivo.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        
     }//GEN-LAST:event_Benviar1ActionPerformed
 
     /**
