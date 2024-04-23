@@ -2,17 +2,18 @@ package com.mycompany.fideairlines.Server.Entities;
 
 import com.mycompany.fideairlines.Server.Abstract.Person;
 import com.mycompany.fideairlines.Server.Utils.DBconexion;
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Map;
+import java.util.HashMap;
 import javax.swing.JOptionPane;
 
-public class Passager extends Person {
+public class Passager extends Person implements Serializable{
 
     private String[] historial;
-    private Map<String, String> preferencias;
+    private String[] preferencias;
     private int vueloId;
     private boolean reserva;
 
@@ -23,14 +24,14 @@ public class Passager extends Person {
         super(email);
     }
 
-    public Passager(String[] historial, Map<String, String> preferencias, int vueloId, boolean reserva) {
+    public Passager(String[] historial, String[] preferencias, int vueloId, boolean reserva) {
         this.historial = historial;
         this.preferencias = preferencias;
         this.vueloId = vueloId;
         this.reserva = reserva;
     }
 
-    public Passager(String[] historial, Map<String, String> preferencias, int vueloId, boolean reserva, String nombre, String email, String contrasena, String numeroTelefono) {
+    public Passager(String[] historial, String[] preferencias, int vueloId, boolean reserva, String nombre, String email, String contrasena, String numeroTelefono) {
         super(nombre, email, contrasena, numeroTelefono);
         this.historial = historial;
         this.preferencias = preferencias;
@@ -96,11 +97,11 @@ public class Passager extends Person {
         this.historial = historial;
     }
 
-    public Map<String, String> getPreferencias() {
+    public String[] getPreferencias() {
         return preferencias;
     }
 
-    public void setPreferencias(Map<String, String> preferencias) {
+    public void setPreferencias(String[] preferencias) {
         this.preferencias = preferencias;
     }
 
@@ -118,6 +119,10 @@ public class Passager extends Person {
 
     public void setReserva(boolean reserva) {
         this.reserva = reserva;
+    }
+
+    public HashMap<String, String> getMap() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
 }

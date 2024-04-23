@@ -254,7 +254,7 @@ public class Registrarse extends javax.swing.JFrame {
                 //Continuar codigo aqui
                 Passager nCliente = new Passager();
                 String[] historial = new String[90];
-                Map<String, String> preferencias = new HashMap<>();
+                String[] preferencias = new String[90];
 
                 nCliente.setEmail(TAemail.getText());
                 nCliente.setNombre(TAnombre.getText());

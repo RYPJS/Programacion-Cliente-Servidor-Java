@@ -4,6 +4,16 @@
  */
 package com.mycompany.fideairlines.Client.View;
 
+import com.mycompany.fideairlines.Client.Runable.ClientApp.ClientApp;
+import com.mycompany.fideairlines.Server.Entities.Passager;
+import com.mycompany.fideairlines.Server.Utils.DBconexion;
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author danie
@@ -33,6 +43,7 @@ public class Historial extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
+        Brefrescar = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         MbuscarVuelo = new javax.swing.JMenu();
         MconsultarHistorial = new javax.swing.JMenu();
@@ -46,13 +57,13 @@ public class Historial extends javax.swing.JFrame {
 
         TABLEhistorial.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Origen", "Destino", "Fecha", "Duración", "Asientos tomados"
+                "Destino", "Fecha salida", "Fecha entrada"
             }
         ));
         jScrollPane1.setViewportView(TABLEhistorial);
@@ -110,6 +121,13 @@ public class Historial extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel4.setText("FideAirline");
 
+        Brefrescar.setText("Refrescar");
+        Brefrescar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BrefrescarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -117,13 +135,17 @@ public class Historial extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(42, 42, 42)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(333, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 227, Short.MAX_VALUE)
+                .addComponent(Brefrescar)
+                .addGap(31, 31, 31))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(34, 34, 34)
-                .addComponent(jLabel4)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(Brefrescar))
                 .addContainerGap(37, Short.MAX_VALUE))
         );
 
@@ -199,11 +221,63 @@ public class Historial extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_mCuentaPersonalMouseClicked
 
+    private void cargarHistorial() {
+    String nombre = ClientApp.getNombre(); // Obtener el nombre del usuario
+    String archivoSerializado = nombre + ".fide";
+
+    try {
+        // Leer el archivo serializado
+        FileInputStream fis = new FileInputStream(archivoSerializado);
+        ObjectInputStream ois = new ObjectInputStream(fis);
+        // Deserializar el objeto Passager
+        Passager passager = (Passager) ois.readObject();
+        // Cerrar el flujo de entrada
+        ois.close();
+
+        // Obtener el historial de destinos
+        String[] historial = passager.getHistorial();
+
+        // Limpiar la tabla antes de agregar nuevas filas
+        DefaultTableModel model = (DefaultTableModel) TABLEhistorial.getModel();
+        model.setRowCount(0);
+
+        // Consultar la base de datos y agregar detalles de vuelo para cada destino en el historial
+        for (String destino : historial) {
+            Connection conexion = DBconexion.ConectarBD();
+            String consulta = "SELECT  fechasalida, fechaEntrada FROM vuelos WHERE destino = ?";
+            PreparedStatement statement = conexion.prepareStatement(consulta);
+            statement.setString(1, destino);
+            ResultSet rs = statement.executeQuery();
+
+            // Iterar sobre los resultados y agregarlos a la tabla
+            while (rs.next()) {
+                String fechaSalida = rs.getString("fechasalida");
+                String fechaLlegada = rs.getString("fechaEntrada");
+                // Agregar una fila a la tabla
+                model.addRow(new Object[]{destino, fechaSalida, fechaLlegada});
+            }
+
+            // Cerrar recursos
+            rs.close();
+            statement.close();
+            conexion.close();
+        }
+    } catch (Exception ex) {
+        ex.printStackTrace();
+        // Manejar cualquier excepción que pueda ocurrir durante la lectura del archivo o la consulta a la base de datos
+    }
+}
+
     private void mChatEnVivoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mChatEnVivoMouseClicked
         ChatEnVivo cev = new ChatEnVivo();
         cev.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_mChatEnVivoMouseClicked
+
+    private void BrefrescarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BrefrescarActionPerformed
+        // TODO add your handling code here:
+        cargarHistorial();
+    }//GEN-LAST:event_BrefrescarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -241,6 +315,7 @@ public class Historial extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Brefrescar;
     private javax.swing.JMenu MbuscarVuelo;
     private javax.swing.JMenu MconsultarHistorial;
     private javax.swing.JTable TABLEhistorial;

@@ -4,7 +4,14 @@
  */
 package com.mycompany.fideairlines.Client.View;
 
+import com.mycompany.fideairlines.Server.Entities.Passager;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.util.HashMap;
+import java.util.Map;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -35,10 +42,9 @@ public class CuentaPersonal extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        Bguardar = new javax.swing.JButton();
-        Bguardar1 = new javax.swing.JButton();
+        BbuscarPreferencias = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        TABLEpreferencias = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -86,40 +92,29 @@ public class CuentaPersonal extends javax.swing.JFrame {
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Preferencias de vuelo");
 
-        Bguardar.setBackground(new java.awt.Color(0, 102, 153));
-        Bguardar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        Bguardar.setForeground(new java.awt.Color(255, 255, 255));
-        Bguardar.setText("Guardar cambios");
-        Bguardar.setBorder(null);
-        Bguardar.addActionListener(new java.awt.event.ActionListener() {
+        BbuscarPreferencias.setBackground(new java.awt.Color(0, 102, 153));
+        BbuscarPreferencias.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        BbuscarPreferencias.setForeground(new java.awt.Color(255, 255, 255));
+        BbuscarPreferencias.setText("Buscar Preferencias");
+        BbuscarPreferencias.setBorder(null);
+        BbuscarPreferencias.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BguardarActionPerformed(evt);
+                BbuscarPreferenciasActionPerformed(evt);
             }
         });
 
-        Bguardar1.setBackground(new java.awt.Color(0, 102, 153));
-        Bguardar1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        Bguardar1.setForeground(new java.awt.Color(255, 255, 255));
-        Bguardar1.setText("Deshacer");
-        Bguardar1.setBorder(null);
-        Bguardar1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Bguardar1ActionPerformed(evt);
-            }
-        });
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        TABLEpreferencias.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
-                "Aereolínea", "Servicios", "Clases"
+                "Aereolínea", "Destinos"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(TABLEpreferencias);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -127,20 +122,21 @@ public class CuentaPersonal extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addGap(37, 37, 37)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel4)
+                                .addComponent(jLabel1)
+                                .addComponent(jLabel3)))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                            .addGap(37, 37, 37)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(TAemail, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(TAnombre, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(74, 74, 74)
-                        .addComponent(Bguardar, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel3)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(TAemail, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(TAnombre, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(70, 70, 70)
+                        .addComponent(BbuscarPreferencias, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
@@ -148,10 +144,7 @@ public class CuentaPersonal extends javax.swing.JFrame {
                         .addGap(20, 20, 20))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel6)
-                        .addGap(42, 42, 42))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(Bguardar1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(84, 84, 84))))
+                        .addGap(42, 42, 42))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -161,7 +154,7 @@ public class CuentaPersonal extends javax.swing.JFrame {
                     .addComponent(jLabel4)
                     .addComponent(jLabel6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -169,13 +162,11 @@ public class CuentaPersonal extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(TAnombre, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(TAnombre, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(BbuscarPreferencias, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Bguardar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Bguardar1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(57, 57, 57))
+                .addContainerGap(156, Short.MAX_VALUE))
         );
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -261,27 +252,42 @@ public class CuentaPersonal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_TAnombreActionPerformed
 
-    private void BguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BguardarActionPerformed
-    if (TAnombre.getText().isEmpty() || TAemail.getText().isEmpty()){
-        JOptionPane.showMessageDialog(null, "Uno o más campos vacíos", "Advertencia", JOptionPane.WARNING_MESSAGE);
-    }
-    else{
-        if (TAemail.getText().contains("@")){
-            //Continuar codigo aqui
-            JOptionPane.showMessageDialog(null, "test");
-            Menu m = new Menu();
-            m.setVisible(true);
-            m.dispose();
-        }
-        else{
-            JOptionPane.showMessageDialog(null, "Asegurese de que el campo de email sea válido (ejemplo person@gmail.com)", "Advertencia", JOptionPane.WARNING_MESSAGE);
-        }
-    }
-    }//GEN-LAST:event_BguardarActionPerformed
+    private void BbuscarPreferenciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BbuscarPreferenciasActionPerformed
+        String nombre = TAnombre.getText();
 
-    private void Bguardar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Bguardar1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_Bguardar1ActionPerformed
+// Nombre del archivo serializado
+        String archivoSerializado = nombre + ".fide";
+
+        try {
+            // Leer el archivo serializado
+            FileInputStream fis = new FileInputStream(archivoSerializado);
+            ObjectInputStream ois = new ObjectInputStream(fis);
+
+            // Deserializar el objeto Passager
+            Passager passager = (Passager) ois.readObject();
+
+            // Cerrar el flujo de entrada
+            ois.close();
+
+            // Obtener las preferencias del pasajero
+            String[] preferencias = passager.getPreferencias();
+
+            // Limpiar la tabla antes de agregar nuevas preferencias
+            DefaultTableModel model = (DefaultTableModel) TABLEpreferencias.getModel();
+            model.setRowCount(0);
+
+            // Iterar sobre las preferencias y agregarlas a la tabla
+            for (int i = 0; i < preferencias.length; i += 2) {
+                String aerolinea = preferencias[i];
+                String destino = (i + 1 < preferencias.length) ? preferencias[i + 1] : ""; // Tomar el siguiente elemento como destino si existe
+                // Agregar la preferencia a la tabla
+                model.addRow(new Object[]{aerolinea, destino});
+            }
+        } catch (IOException | ClassNotFoundException ex) {
+            ex.printStackTrace();
+            // Manejar cualquier excepción que pueda ocurrir durante la lectura o deserialización del archivo
+        }
+    }//GEN-LAST:event_BbuscarPreferenciasActionPerformed
 
     private void MbuscarVueloMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MbuscarVueloMouseClicked
         BuscarVuelo bv = new BuscarVuelo();
@@ -343,10 +349,10 @@ public class CuentaPersonal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Bguardar;
-    private javax.swing.JButton Bguardar1;
+    private javax.swing.JButton BbuscarPreferencias;
     private javax.swing.JMenu MbuscarVuelo;
     private javax.swing.JMenu MconsultarHistorial;
+    private javax.swing.JTable TABLEpreferencias;
     private javax.swing.JTextField TAemail;
     private javax.swing.JTextField TAnombre;
     private javax.swing.JLabel jLabel1;
@@ -358,7 +364,6 @@ public class CuentaPersonal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JMenu mChatEnVivo;
     private javax.swing.JMenu mCuentaPersonal;
     // End of variables declaration//GEN-END:variables

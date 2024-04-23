@@ -1,6 +1,8 @@
 package com.mycompany.fideairlines.Server.Entities;
 
-public class Destination {
+import java.io.Serializable;
+
+public class Destination implements Serializable {
     private int id;
     private String nombre;
     private String horasViaje;

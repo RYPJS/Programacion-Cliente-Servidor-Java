@@ -3,13 +3,14 @@ package com.mycompany.fideairlines.Server.Entities;
 import com.mycompany.fideairlines.Server.Utils.PaymentMethods;
 import com.mycompany.fideairlines.Server.Utils.Category;
 import com.mycompany.fideairlines.Server.Utils.DBconexion;
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Date;
 import javax.swing.JOptionPane;
 
-public class Fly {
+public class Fly implements Serializable{
 
     private int numeroVuelo;
     private String fechaSalida;

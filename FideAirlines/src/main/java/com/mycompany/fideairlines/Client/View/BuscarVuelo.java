@@ -4,17 +4,27 @@
  */
 package com.mycompany.fideairlines.Client.View;
 
-import java.text.ParseException;
+import com.mycompany.fideairlines.Server.Entities.Passager;
+import com.mycompany.fideairlines.Server.Utils.DBconexion;
+import static com.mycompany.fideairlines.Server.Utils.SerializacionUtils.guardarPassager;
+
+import java.io.Serializable;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.HashMap;
+
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author danie
  */
-public class BuscarVuelo extends javax.swing.JFrame {
+public class BuscarVuelo extends javax.swing.JFrame implements Serializable {
 
-    SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
     public BuscarVuelo() {
         initComponents();
     }
@@ -28,16 +38,28 @@ public class BuscarVuelo extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel2 = new javax.swing.JPanel();
-        TAdestino = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        TAfechaViaje = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        Bbuscar = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        BguardarVuelo = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         TABLEvuelos = new javax.swing.JTable();
+        TAdestino = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        TAnumeroVuelo = new javax.swing.JTextField();
+        TAnumero = new javax.swing.JTextField();
+        TAnombre = new javax.swing.JTextField();
+        CBmetodosPago = new javax.swing.JComboBox<>();
+        jLabel10 = new javax.swing.JLabel();
+        Bbuscar = new javax.swing.JButton();
+        jLabel11 = new javax.swing.JLabel();
+        TAemail1 = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -46,43 +68,33 @@ public class BuscarVuelo extends javax.swing.JFrame {
         mCuentaPersonal = new javax.swing.JMenu();
         mChatEnVivo = new javax.swing.JMenu();
 
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Destino");
+
+        jButton1.setText("jButton1");
+
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setText("Numero de vuelo");
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel2.setBackground(new java.awt.Color(0, 180, 255));
         jPanel2.setFocusCycleRoot(true);
 
-        TAdestino.setBackground(new java.awt.Color(89, 79, 79));
-        TAdestino.setForeground(new java.awt.Color(255, 255, 255));
-        TAdestino.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TAdestinoActionPerformed(evt);
-            }
-        });
-
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Destino");
 
-        TAfechaViaje.setBackground(new java.awt.Color(89, 79, 79));
-        TAfechaViaje.setForeground(new java.awt.Color(255, 255, 255));
-        TAfechaViaje.addActionListener(new java.awt.event.ActionListener() {
+        BguardarVuelo.setBackground(new java.awt.Color(0, 102, 153));
+        BguardarVuelo.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        BguardarVuelo.setForeground(new java.awt.Color(255, 255, 255));
+        BguardarVuelo.setText("Guardar vuelo");
+        BguardarVuelo.setBorder(null);
+        BguardarVuelo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TAfechaViajeActionPerformed(evt);
-            }
-        });
-
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Fecha viaje");
-
-        Bbuscar.setBackground(new java.awt.Color(0, 102, 153));
-        Bbuscar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        Bbuscar.setForeground(new java.awt.Color(255, 255, 255));
-        Bbuscar.setText("Buscar");
-        Bbuscar.setBorder(null);
-        Bbuscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BbuscarActionPerformed(evt);
+                BguardarVueloActionPerformed(evt);
             }
         });
 
@@ -102,7 +114,7 @@ public class BuscarVuelo extends javax.swing.JFrame {
                 {null, null, null, null, null}
             },
             new String [] {
-                "Origen", "Destino", "Horario", "Duración", "Asientos"
+                "Numero de  vuelo", "Destino", "Fecha salida", "Fecha entrada", "Aerolinea"
             }
         ));
         jScrollPane1.setViewportView(TABLEvuelos);
@@ -111,13 +123,14 @@ public class BuscarVuelo extends javax.swing.JFrame {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+            .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(133, 133, 133))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 507, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(159, 159, 159))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 842, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -129,45 +142,154 @@ public class BuscarVuelo extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        TAdestino.setBackground(new java.awt.Color(89, 79, 79));
+        TAdestino.setForeground(new java.awt.Color(255, 255, 255));
+        TAdestino.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TAdestinoActionPerformed(evt);
+            }
+        });
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("Nombre Completo");
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("Email");
+
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setText("Numero Telefono");
+
+        TAnumeroVuelo.setBackground(new java.awt.Color(89, 79, 79));
+        TAnumeroVuelo.setForeground(new java.awt.Color(255, 255, 255));
+        TAnumeroVuelo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TAnumeroVueloActionPerformed(evt);
+            }
+        });
+
+        TAnumero.setBackground(new java.awt.Color(89, 79, 79));
+        TAnumero.setForeground(new java.awt.Color(255, 255, 255));
+        TAnumero.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TAnumeroActionPerformed(evt);
+            }
+        });
+
+        TAnombre.setBackground(new java.awt.Color(89, 79, 79));
+        TAnombre.setForeground(new java.awt.Color(255, 255, 255));
+        TAnombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TAnombreActionPerformed(evt);
+            }
+        });
+
+        CBmetodosPago.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tarjeta de crédito", "Tarjeta de débito", "Pago en efectivo" }));
+
+        jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel10.setText("Metodo de pago");
+
+        Bbuscar.setBackground(new java.awt.Color(0, 102, 153));
+        Bbuscar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        Bbuscar.setForeground(new java.awt.Color(255, 255, 255));
+        Bbuscar.setText("Buscar");
+        Bbuscar.setBorder(null);
+        Bbuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BbuscarActionPerformed(evt);
+            }
+        });
+
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel11.setText("Numero vuelo");
+
+        TAemail1.setBackground(new java.awt.Color(89, 79, 79));
+        TAemail1.setForeground(new java.awt.Color(255, 255, 255));
+        TAemail1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TAemail1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(18, Short.MAX_VALUE)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(39, 39, 39)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(TAfechaViaje, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(Bbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(52, 52, 52))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(TAdestino, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel2))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(6, 6, 6)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(TAdestino, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(Bbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel2Layout.createSequentialGroup()
+                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(TAnombre, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel6))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(jPanel2Layout.createSequentialGroup()
+                                            .addComponent(TAemail1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(TAnumero, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(jLabel8)))
+                                        .addComponent(jLabel7))
+                                    .addGap(18, 18, 18)
+                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel10)
+                                        .addComponent(CBmetodosPago, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGap(38, 38, 38)
+                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(TAnumeroVuelo, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel11)))
+                                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(37, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(BguardarVuelo, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(367, 367, 367))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(59, 59, 59)
+                .addContainerGap()
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(TAdestino, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3)
-                .addGap(23, 23, 23)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(TAfechaViaje, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TAdestino, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Bbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(45, 45, 45)
+                .addGap(18, 18, 18)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel6)
+                        .addComponent(jLabel7))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel10)
+                            .addComponent(jLabel11))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(TAnombre, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(TAnumeroVuelo, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(TAnumero, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(CBmetodosPago)
+                            .addComponent(TAemail1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(28, 28, 28)
+                .addComponent(BguardarVuelo, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -241,19 +363,12 @@ public class BuscarVuelo extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void TAdestinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TAdestinoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TAdestinoActionPerformed
-
-    private void TAfechaViajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TAfechaViajeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TAfechaViajeActionPerformed
 
     private void MbuscarVueloMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MbuscarVueloMouseClicked
         BuscarVuelo bv = new BuscarVuelo();
@@ -279,23 +394,113 @@ public class BuscarVuelo extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_mChatEnVivoMouseClicked
 
-    private void BbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BbuscarActionPerformed
-    if (TAdestino.getText().isEmpty()){
-        JOptionPane.showMessageDialog(null, "Uno o más campos vacíos", "Advertencia", JOptionPane.WARNING_MESSAGE);
-    }
-    else{
-        formatoFecha.setLenient(false); // Evita fechas inválidas
-        try {
-            formatoFecha.parse(TAfechaViaje.getText());
-            JOptionPane.showMessageDialog(null, "test");
-            //Continuar acá
-        } catch (ParseException e) {
-            JOptionPane.showMessageDialog(null, "Formato de fecha inválido. Asegurese que cumpla con dd/mm/yyyy", "Advertencia", JOptionPane.WARNING_MESSAGE);
-        }       
-    }
+    private void BguardarVueloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BguardarVueloActionPerformed
+        String nombre = TAnombre.getText();
+        String email = TAemail1.getText();
+        String destino = TAdestino.getText();
+        String numero = TAnumero.getText();
+        String pago = CBmetodosPago.getSelectedItem().toString();
+        String numeroVuelo = TAnumeroVuelo.getText();
 
-    
+        try {
+            Connection conexion = DBconexion.ConectarBD();
+
+            // Consulta SQL para buscar vuelos por número de vuelo en la base de datos
+            String consulta = "SELECT destino, aerolinea FROM vuelos WHERE numerovuelo = ?";
+            PreparedStatement statement = conexion.prepareStatement(consulta);
+            statement.setString(1, numeroVuelo);
+
+            // Ejecutar la consulta
+            ResultSet rs = statement.executeQuery();
+
+            // Verificar si se encontró el vuelo
+            if (rs.next()) {
+                // Obtener el nombre del destino y la aerolínea del resultado de la consulta
+                String nombreDestino = rs.getString("destino");
+                String nombreAerolinea = rs.getString("aerolinea");
+
+                // Crear un objeto Passager con los datos proporcionados por el usuario
+                String[] preferencias = {nombreAerolinea, nombreDestino}; // Array de preferencias
+                Passager pasajero = new Passager(new String[]{destino}, preferencias, Integer.parseInt(numeroVuelo), true);
+
+                // Guardar el objeto Passager en un archivo serializado
+                String nombreArchivo = nombre + ".fide";
+                guardarPassager(nombreArchivo, pasajero);
+
+                JOptionPane.showMessageDialog(null, "Información del pasajero guardada correctamente", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "No se encontró ningún vuelo con el número especificado", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+
+            // Cerrar recursos
+            rs.close();
+            statement.close();
+            conexion.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al buscar vuelo y guardar datos: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_BguardarVueloActionPerformed
+
+    private void TAdestinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TAdestinoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TAdestinoActionPerformed
+
+    private void TAnumeroVueloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TAnumeroVueloActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TAnumeroVueloActionPerformed
+
+    private void TAnumeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TAnumeroActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TAnumeroActionPerformed
+
+    private void TAnombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TAnombreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TAnombreActionPerformed
+
+    private void BbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BbuscarActionPerformed
+        // TODO add your handling code here:
+        // Obtener el nombre del destino desde el campo de texto TAdestino
+        String destino = TAdestino.getText();
+
+        try {
+            Connection conexion = DBconexion.ConectarBD();
+
+            // Consulta SQL para buscar vuelos por destino en la base de datos
+            String consulta = "SELECT * FROM vuelos WHERE destino LIKE ?";
+            PreparedStatement statement = conexion.prepareStatement(consulta);
+            statement.setString(1, "%" + destino + "%");
+
+            // Ejecutar la consulta y obtener el resultado
+            ResultSet resultado = statement.executeQuery();
+
+            // Limpiar la tabla antes de cargar nuevos datos
+            DefaultTableModel modeloTabla = (DefaultTableModel) TABLEvuelos.getModel();
+            modeloTabla.setRowCount(0);
+
+            // Iterar sobre el resultado y agregar filas a la tabla
+            while (resultado.next()) {
+                // Obtener los datos del resultado
+                String numeroVuelo = resultado.getString("numerovuelo");
+                String destinoVuelo = resultado.getString("destino");
+                String fechaSalida = resultado.getString("fechasalida");
+                String fechaEntrada = resultado.getString("fechaentrada");
+                String aerolinea = resultado.getString("aerolinea");
+
+                // Agregar una fila a la tabla con los datos obtenidos
+                modeloTabla.addRow(new Object[]{numeroVuelo, destinoVuelo, fechaSalida, fechaEntrada, aerolinea});
+            }
+
+            // Cerrar la conexión con la base de datos
+            conexion.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al buscar vuelos: " + ex.getMessage());
+        }
     }//GEN-LAST:event_BbuscarActionPerformed
+
+    private void TAemail1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TAemail1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TAemail1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -334,15 +539,27 @@ public class BuscarVuelo extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Bbuscar;
+    private javax.swing.JButton BguardarVuelo;
+    private javax.swing.JComboBox<String> CBmetodosPago;
     private javax.swing.JMenu MbuscarVuelo;
     private javax.swing.JMenu MconsultarHistorial;
     private javax.swing.JTable TABLEvuelos;
     private javax.swing.JTextField TAdestino;
-    private javax.swing.JTextField TAfechaViaje;
+    private javax.swing.JTextField TAemail1;
+    private javax.swing.JTextField TAnombre;
+    private javax.swing.JTextField TAnumero;
+    private javax.swing.JTextField TAnumeroVuelo;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -351,4 +568,5 @@ public class BuscarVuelo extends javax.swing.JFrame {
     private javax.swing.JMenu mChatEnVivo;
     private javax.swing.JMenu mCuentaPersonal;
     // End of variables declaration//GEN-END:variables
+
 }

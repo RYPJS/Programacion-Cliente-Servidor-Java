@@ -2,13 +2,14 @@ package com.mycompany.fideairlines.Server.Entities;
 
 import com.mycompany.fideairlines.Server.Abstract.Person;
 import com.mycompany.fideairlines.Server.Utils.DBconexion;
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
-public class Admin extends Person {
+public class Admin extends Person implements Serializable{
 
     private int numeroEmpleado;
 
