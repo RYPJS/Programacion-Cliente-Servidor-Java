@@ -9,10 +9,14 @@ public class Destination implements Serializable {
 
     
     public Destination(int id, String nombre, String horasViaje) {
-        this.id = id;
         this.nombre = nombre;
         this.horasViaje = horasViaje;
     }
+    public Destination( String nombre, String horasViaje) {
+        this.nombre = nombre;
+        this.horasViaje = horasViaje;
+    }
+
 
     public int getId() {
         return id;

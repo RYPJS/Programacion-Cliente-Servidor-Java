@@ -30,6 +30,7 @@ public class MenuServer extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         BTagregarVuelo = new javax.swing.JButton();
         BTchat = new javax.swing.JButton();
+        BTdestino = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
 
@@ -57,20 +58,28 @@ public class MenuServer extends javax.swing.JFrame {
             }
         });
 
+        BTdestino.setText("Agregar destino");
+        BTdestino.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTdestinoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(193, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(194, 194, 194))
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(89, 89, 89)
-                .addComponent(BTagregarVuelo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(BTchat, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(86, 86, 86))
+                .addContainerGap(59, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(BTagregarVuelo)
+                        .addGap(18, 18, 18)
+                        .addComponent(BTdestino, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(BTchat, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(59, 59, 59))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -80,7 +89,8 @@ public class MenuServer extends javax.swing.JFrame {
                 .addGap(115, 115, 115)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BTagregarVuelo)
-                    .addComponent(BTchat))
+                    .addComponent(BTchat)
+                    .addComponent(BTdestino))
                 .addContainerGap(224, Short.MAX_VALUE))
         );
 
@@ -142,6 +152,13 @@ public class MenuServer extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_BTagregarVueloActionPerformed
 
+    private void BTdestinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTdestinoActionPerformed
+        // TODO add your handling code here:
+        AgregarDestino ad = new AgregarDestino();
+        ad.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_BTdestinoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -180,6 +197,7 @@ public class MenuServer extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BTagregarVuelo;
     private javax.swing.JButton BTchat;
+    private javax.swing.JButton BTdestino;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
